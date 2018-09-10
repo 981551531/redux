@@ -8,7 +8,7 @@ import App from '../containers/App'
 import home from '../containers/home/index'
 import NotFound from '../containers/NotFound'
 import test from '../containers/test/index'
-
+import  newHome from '../containers/newHome/index'
 class RouteMap extends React.Component {
     render() {
 
@@ -18,7 +18,7 @@ class RouteMap extends React.Component {
                 <Switch>
                     <App>
                         <Switch>
-                            <Route path="/" exact title="我是首页" component={home}></Route>
+                            <Route path="/" exact title="我是首页" component={newHome}></Route>
                             <Route path="/Tobu" exact component={Tobu}/>
                             <Route path="/re" exact component={re}></Route>
                             <Route path="/detail" exact component={Detal}></Route>

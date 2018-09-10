@@ -1,6 +1,6 @@
 import apiUrl from '../../config/apiUrl'
 import fetchApi  from '../fetchApi' ;
-let ft=new  fetchApi();
+ 
 class homeSer{
      getNewsType(){
          let url=apiUrl.url+apiUrl.nerType;
@@ -13,7 +13,7 @@ class homeSer{
          "rand":"1536564797969"
          }
          console.log("进入了")
-         ft.POST(url,parames)
+         fetchApi.POST(url,parames)
           ;
      }
 }

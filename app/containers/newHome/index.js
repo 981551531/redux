@@ -15,17 +15,17 @@ class newHome extends React.Component {
         )
     }
 
-    componentDidMount() {
+       componentDidMount() {
              //获取新闻类别
-        this.getNewType();
+         this.getNewType();
 
     }
 
-    getNewType(){
-        newhome.getNewsType();
+     getNewType(){
+         newhome.getNewsType();
     }
 
-    updateCityHandler() {
+        updateCityHandler() {
 
     }
 }

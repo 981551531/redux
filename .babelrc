@@ -1,16 +1,29 @@
 {
-  "presets": ["react","es2015", "stage-0", "env"],
-  "env": {
-    "development": {
-      "plugins": [["react-transform", {
-        "transforms": [{
-          "transform": "react-transform-hmr",
+  "presets": [
+    "react",
+    "es2015",
+    "stage-0",
+    "env"
+  ],
+  "plugins": [
+    [
+      "react-transform",
+      {
+        "transforms": [
+          {
+            "transform": "react-transform-hmr",
+            "imports": [
+              "react"
+            ],
+            "locals": [
+              "module"
+            ]
+          }
+        ]
+      }
+    ],
+    "babel-plugin-syntax-dynamic-import",
+    "transform-runtime"
 
-          "imports": ["react"],
-
-          "locals": ["module"]
-        }]
-      }],"babel-plugin-syntax-dynamic-import"]
-    }
-  }
+  ]
 }
