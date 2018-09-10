@@ -25,6 +25,11 @@ const Tobu = Loadable({
 
 });
 
+const newHome=   Loadable({
+    loader: () => import('../containers/newHome/index'),
+    loading: Loading,
+
+});
 class RouteMap extends React.Component {
 
    
@@ -36,9 +41,11 @@ class RouteMap extends React.Component {
             <Switch>
                 <App>
                     <Switch>
-                        <Route exact path="/" component={Home}  />
+                        {/*<Route exact path="/" component={Home}  />
                         <Route path="/re" component={About} />
-                        <Route path="/Tobu" component={Tobu} />
+                        <Route path="/Tobu" component={Tobu} />*/}
+                        
+                        <Route exact path="/" component={newHome} />
                     </Switch>
                 </App>
             </Switch>
