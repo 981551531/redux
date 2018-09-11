@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+  
     "start": "webpack",
-    "server": "webpack-dev-server   --open --colors",
+    "server": "set NODE_ENV=dev &&  webpack-dev-server   --open --colors",
     "build": "set NODE_ENV=production && webpack  --mode production --config ./webpack.production.config.js --progress"
   },
   "keywords": [],

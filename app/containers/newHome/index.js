@@ -1,45 +1,51 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'   ;
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'    ;
+import NewTagStyle from './subPage/newTagStyle'
 import homeSer from '../../fetch/Home/homeSer'
 
-let newhome=new homeSer();
+let newhome = new homeSer();
+
 class newHome extends React.Component {
+    constructor(){
+        super();
+        this.state={
+            
+        }
+    }
     render() {
         return (
             <div>
+                  <NewTagStyle/>
                 新闻首页
 
             </div>
         )
     }
 
-       componentDidMount() {
-             //获取新闻类别
-         this.getNewType();
+    async  componentDidMount() {
+        //获取新闻类别
+        let date = await  this.getNewType();
+        console.log("在新闻首页中得到数据",date)
 
     }
 
-     getNewType(){
-         newhome.getNewsType();
+    async getNewType() {
+        return await newhome.getNewsType();
     }
 
-        updateCityHandler() {
+    updateCityHandler() {
 
     }
 }
 
 function mapStateToProps(state) {
-    return {
-
-    }
+    return {}
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(newHome);

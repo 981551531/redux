@@ -13,10 +13,22 @@ module.exports = {
         extensions:['.js','.jsx','json']
     },
     devServer: {     ///webpack-dev-server 服务配置
-      /*  proxy: [{ //配置跨域
-            context: ['/auth', '/api'],
-            target: 'http://localhost:3000',
-        }],*/
+    proxy: [{ //配置跨域
+            context: ['/news', '/api'],
+            target: 'https://news.baidu.com',
+         secure: false    ,     //https 请求需要配置此项
+         changeOrigin: true,    //跨域请求需要配置此项
+        }], 
+
+      /*  proxy: {
+            // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
+            // koa 代码在 ./mock 目录中，启动命令为 npm run mock
+            '/news': {
+                target: 'https://news.baidu.com',
+                secure: false    ,
+                changeOrigin: true,
+            }
+        },*/
         contentBase: "./public",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true,//实时刷新
@@ -40,6 +52,9 @@ module.exports = {
         ]
     }   ,
     plugins: [
+        new webpack.DefinePlugin({
+            _ENV_: JSON.stringify(process.env.NODE_ENV)
+        }),
         new webpack.BannerPlugin('版权所有，翻版必究'),
         new HtmlWebpackPlugin({
             template: __dirname + "/app/index.tmpl.html"//new 一个这个插件的实例，并传入相关的参数
