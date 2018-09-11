@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'   ;
 import {Link} from 'react-router-dom'    ;
 import NewTagStyle from './subPage/newTagStyle'
 import homeSer from '../../fetch/Home/homeSer'
-
+import style from './index.less'
 let newhome = new homeSer();
 
 class newHome extends React.Component {
@@ -18,7 +18,7 @@ class newHome extends React.Component {
         return (
             <div>
                   <NewTagStyle/>
-                新闻首页
+               <div className={style.font_color}> 新闻首页</div>
 
             </div>
         )

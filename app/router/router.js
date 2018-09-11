@@ -41,9 +41,9 @@ class RouteMap extends React.Component {
             <Switch>
                 <App>
                     <Switch>
-                        {/*<Route exact path="/" component={Home}  />
+                        {/*<Route exact path="/" component={Home}  />  */}
                         <Route path="/re" component={About} />
-                        <Route path="/Tobu" component={Tobu} />*/}
+                        <Route path="/Tobu" component={Tobu} />
                         
                         <Route exact path="/" component={newHome} />
                     </Switch>

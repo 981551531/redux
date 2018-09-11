@@ -1,5 +1,5 @@
 import React from 'react'
-   import './style.less'
+
 class Header extends React.Component {
     constructor() {
         super();
