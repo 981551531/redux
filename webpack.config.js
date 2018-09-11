@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
 module.exports = {
     devtool: 'eval-source-map',//用户生成对照源文件，方便调试
     entry: path.resolve(__dirname, 'app/index.js'),//已多次提及的唯一入口文件
@@ -69,25 +71,51 @@ module.exports = {
                   ]
               },*/
 
-            {
+            /*  {
+                  test: [/\.css$/, /\.less$/],
+                  use: ExtractTextPlugin.extract({
+                      fallback: "style-loader",  // 规则提取器
+                      use: [{
+                          loader: "css-loader",
+                          options: {
+                              minimize: false,  // 是否压缩
+                              modules: true,  // 是否启用 css modules 规范
+                              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+
+                          },
+
+                      }, {
+                          loader: "less-loader",
+
+                      }]
+                  }),
+                  exclude: /node_modules/
+              },
+  */
+
+            {   // 使用MiniCssExtractPlugin处理css
                 test: [/\.css$/, /\.less$/],
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",  // 规则提取器
-                    use: [{
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+
+                    },
+                 
+                    {
+
                         loader: "css-loader",
                         options: {
                             minimize: false,  // 是否压缩
-                            modules: true,  // 是否启用 css modules 规范
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-
+                            modules: true,
+                            camelCase: true,
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
                         },
 
-                    }, {
-                        loader: "less-loader"   ,
-
-                    }]
-                }),
-                exclude: /node_modules/
+                    },
+                    {
+                        loader: "less-loader"
+                    }
+                ]
             },
 
 
@@ -107,7 +135,10 @@ module.exports = {
             template: __dirname + "/app/index.tmpl.html"//new 一个这个插件的实例，并传入相关的参数
         }),
         new webpack.HotModuleReplacementPlugin(),//热加载插件
-        new ExtractTextPlugin("[name]-bundle-[hash].css")
+        /*  new ExtractTextPlugin("[name]-bundle-[hash].css")*/
+        new MiniCssExtractPlugin({
+            filename: "[name]-bundle-[hash].css"
 
+        }),
     ],
 }
