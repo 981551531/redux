@@ -16,7 +16,7 @@ module.exports = {
     },
     devServer: {     ///webpack-dev-server 服务配置
         proxy: [{ //配置跨域
-            context: ['/news', '/api'],
+            context: ['/news', '/sn/api'],
             target: 'https://news.baidu.com',
             secure: false,     //https 请求需要配置此项
             changeOrigin: true,    //跨域请求需要配置此项
@@ -108,7 +108,7 @@ module.exports = {
                             minimize: false,  // 是否压缩
                             modules: true,
                             camelCase: true,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                            localIdentName: '[name]__[local]--[hash:base64:5]'
                         },
 
                     },

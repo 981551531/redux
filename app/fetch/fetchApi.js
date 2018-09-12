@@ -38,7 +38,7 @@ class fetchApi {
      */
     static async commonFetcdh(url, options, method = 'GET') {
         const searchStr = fetchApi.obj2String(options)
-        console.log("打印请求的参数", searchStr)
+       
         let initObj = {}
         if (method === 'GET') { // 如果是GET请求，拼接url
             url += '?' + searchStr
@@ -82,7 +82,7 @@ class fetchApi {
      * @param options 请求参数
      */
     static async POST(url, options) {
-        console.log(_ENV_)
+
         let data = await fetchApi.commonFetcdh(url, options, 'POST');
 
         return data;
