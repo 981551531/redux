@@ -32,6 +32,17 @@ class NewListcpt extends Component {
                     </div>
                 </div>
             }
+            else {
+                console.log("单个图片",item.imageurls)
+                str=<div key={index} className={bootstrap.row}>
+                    <div className={bootstrap["col-xs-3"]}>
+                        {item.imageurls.map((item, index) => {
+                           console.log("2222222222",item)
+                        })}
+                    </div>
+                    <div  className={`${bootstrap["col-xs-9"]} ${style.new_tile}`}>{item.title}</div>
+                </div>
+            }
             return str;
         }
 
@@ -43,15 +54,4 @@ class NewListcpt extends Component {
                 </div>
             </React.Fragment>
         )
-    }
-
-    componentDidMount() {
-        this.setState({
-            list: this.state.list.concat(this.props.data)
-        })
-    }
-
-
-}
-
-export default NewListcpt;
+   
