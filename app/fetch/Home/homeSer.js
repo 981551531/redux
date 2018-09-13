@@ -30,7 +30,7 @@ class homeSer {
             "category_id": category_id,
             "action": 0,
             "action": 0,
-            "display_time": timestamp2,
+            "display_time": (new Date()).valueOf(),
             "wf": 0
         }
 

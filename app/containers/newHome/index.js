@@ -19,7 +19,7 @@ class newHome extends React.Component {
             <React.Fragment>
                 <NewTagStyle/>
                 <NewList className={style.font_color}> 新闻首页</NewList>
-
+              
             </React.Fragment>
         )
     }
