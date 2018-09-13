@@ -1,15 +1,18 @@
 import React, {Component} from "react";
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import homeSer from '../../../fetch/Home/homeSer'
 import NewListcpt from '../../../components/newHome/NewListcpt'
 import LoadMorecpt from '../../../components/newHome/loadMorecpt'
+import * as  newInfoAction from '../../../actions/newInfo'
 
 let newhome = new homeSer();
 
 class NewList extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor() {
+        super();
         this.state = {
-            isLoadingMore:false,
+            isLoadingMore: false,
             newList: []
         }
 
@@ -19,19 +22,24 @@ class NewList extends Component {
     render() {
         return (
             <React.Fragment>
+                <div>{this.props.myTest.namew}</div>
                 <NewListcpt data={this.state.newList}></NewListcpt>
-                <LoadMorecpt isLoadingMore={this.state.isLoadingMore} loadMoreFn={this.getMoreDataHanler.bind(this)}></LoadMorecpt>
+                <LoadMorecpt isLoadingMore={this.state.isLoadingMore}
+                             loadMoreFn={this.getMoreDataHanler.bind(this)}></LoadMorecpt>
             </React.Fragment>
         )
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+
+
+    }
+
+    async getMoreDataHanler() {
+        console.log("44444444444");
         await this.getNewList();
     }
-    async  getMoreDataHanler(){
-          console.log("44444444444")  ;
-        await this.getNewList();
-    }
+
     async getNewList() {
         let data = await newhome.getNewsList(101);
         let list = data.data.news;
@@ -39,11 +47,27 @@ class NewList extends Component {
         this.setState({
             newList: this.state.newList.concat(data.data.news)
         })
-        console.log(this.state.newList)
 
 
     }
 
 }
 
-export default NewList;
+
+function mapStateToProps(state) {
+    return {
+        myTest: state.myTest
+
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewList)

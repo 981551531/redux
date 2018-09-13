@@ -7,7 +7,7 @@ import './style2.less'
 class re extends React.Component {
     render() {
         return (
-            <div><b>{this.props.userDate.city}</b>
+            <div><b>{this.props.userInfo.city}</b>
                 <hr/>
 
                 <h1  className='bord'>bord</h1>

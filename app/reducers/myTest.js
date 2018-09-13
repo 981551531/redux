@@ -1,11 +1,11 @@
 import * as actionTypes from '../constants/newsList'
 
 const initialState = {}
-export default function newsList(state = initialState, action) {
+export default function myTest(state =initialState, action) {
     switch (action.type) {
 
-        case actionTypes.ADD_NEWSLIST:
-                 console.log("ADD_NEWSLIST",action.data)
+        case actionTypes.UPDATE_NEWALIST:
+
             return action.data;
             break;
         default:
@@ -14,4 +14,3 @@ export default function newsList(state = initialState, action) {
     }
 
 }
-

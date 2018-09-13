@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import bootstrap from "../../static/bootstrap/css/bootstrap.min.css"
 import style from "./style.less"
 
@@ -11,7 +13,7 @@ class NewListcpt extends Component {
     }
 
     render() {
-        let listStr = (item, index) => {
+      /*  let listStr = (item, index) => {
 
             let str = "";
             if (item.imageurls.length === 3) {
@@ -56,18 +58,41 @@ class NewListcpt extends Component {
                 </div>
             }
             return str;
-        }
+        }*/
 
         return (
             <React.Fragment>
-                <div className={`${bootstrap["container"]}`}>
+               {/* <div className={`${bootstrap["container"]}`}>
                     {this.props.data.map((item, index) => listStr(item, index))}
 
-                </div>
+                </div>*/}
+                <div>fsdfd{this.props.myTest.namew} </div>
             </React.Fragment>
         )
     }
+
+    componentDidMount() {
+        console.log("111111111",this.props.newList11)
+    }
 }
 
-export default NewListcpt
+
+function mapStateToProps(state) {
+    return {
+        myTest: state.myTest
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewListcpt)
+
+
+
+ 
    
