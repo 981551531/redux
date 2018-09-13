@@ -21,10 +21,18 @@ class NewList extends Component {
     }
 
     render() {
-        let sss= this.props.myTest.myusername;
+        if (this.props.myTest.a) {
+
+
+            console.log("55555", this.props.myTest.a.name)
+        }
         return (
             <React.Fragment>
-                <div>{typeof(sss)}</div>
+                <div><h1>打印数据<b>
+                    {
+                        this.props.myTest.a&&this.props.myTest.a.name
+                    }
+                </b></h1></div>
                 <NewListcpt data={this.state.newList}></NewListcpt>
                 <LoadMorecpt isLoadingMore={this.state.isLoadingMore}
                              loadMoreFn={this.getMoreDataHanler.bind(this)}></LoadMorecpt>
@@ -48,9 +56,9 @@ class NewList extends Component {
         let a = {
             name: "潘国臣"
         };
-       // a = JSON.stringify(a)
+        // a = JSON.stringify(a)
         this.props.myTestAction.update({
-            myusername: a
+            a
         })
         this.setState({
             newList: this.state.newList.concat(data.data.news)
