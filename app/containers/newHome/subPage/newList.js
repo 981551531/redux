@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 import homeSer from '../../../fetch/Home/homeSer'
 import NewListcpt from '../../../components/newHome/NewListcpt'
 import LoadMorecpt from '../../../components/newHome/loadMorecpt'
-import * as  newInfoAction from '../../../actions/newInfo'
+
+import * as myTestAction from '../../../actions/myTest'
 
 let newhome = new homeSer();
 
@@ -20,9 +21,10 @@ class NewList extends Component {
     }
 
     render() {
+        let sss= this.props.myTest.myusername;
         return (
             <React.Fragment>
-                <div>{this.props.myTest.namew}</div>
+                <div>{typeof(sss)}</div>
                 <NewListcpt data={this.state.newList}></NewListcpt>
                 <LoadMorecpt isLoadingMore={this.state.isLoadingMore}
                              loadMoreFn={this.getMoreDataHanler.bind(this)}></LoadMorecpt>
@@ -30,8 +32,8 @@ class NewList extends Component {
         )
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        await this.getNewList();
 
     }
 
@@ -43,7 +45,13 @@ class NewList extends Component {
     async getNewList() {
         let data = await newhome.getNewsList(101);
         let list = data.data.news;
-
+        let a = {
+            name: "潘国臣"
+        };
+       // a = JSON.stringify(a)
+        this.props.myTestAction.update({
+            myusername: a
+        })
         this.setState({
             newList: this.state.newList.concat(data.data.news)
         })
@@ -57,14 +65,11 @@ class NewList extends Component {
 function mapStateToProps(state) {
     return {
         myTest: state.myTest
-
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-
-    }
+    return {myTestAction: bindActionCreators(myTestAction, dispatch)}
 }
 
 export default connect(

@@ -66,13 +66,13 @@ class NewListcpt extends Component {
                     {this.props.data.map((item, index) => listStr(item, index))}
 
                 </div>*/}
-                <div>fsdfd{this.props.myTest.namew} </div>
+           {/*     <div>木偶组件中{this.props.myTest.myusername.name} </div>*/}
             </React.Fragment>
         )
     }
 
     componentDidMount() {
-        console.log("111111111",this.props.newList11)
+
     }
 }
 
