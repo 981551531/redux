@@ -3,11 +3,13 @@ import userInfo from './userInfo';
 import user from './userDate';
 import newsList from './newsList';
 import myTest from './myTest'
+import newsDetail from './newsDetail'
 
 const rootReducer = combineReducers({
     userInforr: userInfo,
     userDatettt: user,
     myTest: myTest,
-    newsListsd: newsList
+    newsList: newsList,
+    newsDetail: newsDetail
 })
 export default rootReducer;

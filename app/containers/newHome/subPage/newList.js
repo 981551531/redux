@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 import homeSer from '../../../fetch/Home/homeSer'
 import NewListcpt from '../../../components/newHome/NewListcpt'
 import LoadMorecpt from '../../../components/newHome/loadMorecpt'
+import {Link} from 'react-router-dom'
 
-import * as myTestAction from '../../../actions/myTest'
+import * as newListActions from '../../../actions/newInfo'
 
 let newhome = new homeSer();
 
@@ -21,21 +22,14 @@ class NewList extends Component {
     }
 
     render() {
-        if (this.props.myTest.a) {
 
-
-            console.log("55555", this.props.myTest.a.name)
-        }
         return (
             <React.Fragment>
-                <div><h1>打印数据<b>
-                    {
-                        this.props.myTest.a&&this.props.myTest.a.name
-                    }
-                </b></h1></div>
-                <NewListcpt data={this.state.newList}></NewListcpt>
+
+                <NewListcpt dataList={this.state.newList}></NewListcpt>
                 <LoadMorecpt isLoadingMore={this.state.isLoadingMore}
                              loadMoreFn={this.getMoreDataHanler.bind(this)}></LoadMorecpt>
+
             </React.Fragment>
         )
     }
@@ -46,22 +40,24 @@ class NewList extends Component {
     }
 
     async getMoreDataHanler() {
-        console.log("44444444444");
+
         await this.getNewList();
     }
 
     async getNewList() {
+        this.setState({
+            isLoadingMore: true
+        })
         let data = await newhome.getNewsList(101);
         let list = data.data.news;
-        let a = {
-            name: "潘国臣"
-        };
-        // a = JSON.stringify(a)
-        this.props.myTestAction.update({
-            a
+
+        this.props.newListActions.add({
+            dataList: list
         })
+        console.log("智能组件", this.props.newsList.dataList)
         this.setState({
-            newList: this.state.newList.concat(data.data.news)
+            newList: this.state.newList.concat(this.props.newsList.dataList),
+            isLoadingMore: false
         })
 
 
@@ -72,12 +68,12 @@ class NewList extends Component {
 
 function mapStateToProps(state) {
     return {
-        myTest: state.myTest
+        newsList: state.newsList
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {myTestAction: bindActionCreators(myTestAction, dispatch)}
+    return {newListActions: bindActionCreators(newListActions, dispatch)}
 }
 
 export default connect(

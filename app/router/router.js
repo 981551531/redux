@@ -30,6 +30,16 @@ const newHome=   Loadable({
     loading: Loading,
 
 });
+const newList=   Loadable({
+    loader: () => import('../components/newHome/newListcpt'),
+    loading: Loading,
+
+});
+const newsDetal=   Loadable({
+    loader: () => import('../containers/newsDetal/index'),
+    loading: Loading,
+
+});
 class RouteMap extends React.Component {
 
    
@@ -41,10 +51,11 @@ class RouteMap extends React.Component {
             <Switch>
                 <App>
                     <Switch>
-                        {/*<Route exact path="/" component={Home}  />  */}
+                        <Route   path="/home" component={Home}  />
                         <Route path="/re" component={About} />
                         <Route path="/Tobu" component={Tobu} />
-                        
+                        <Route path="/newList" component={newList} />
+                          <Route path="/newsDetal/:id" component={newsDetal}/>
                         <Route exact path="/" component={newHome} />
                     </Switch>
                 </App>
