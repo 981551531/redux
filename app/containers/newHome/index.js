@@ -40,9 +40,9 @@ class newHome extends React.Component {
 
     componentDidMount() {
         let h = common.getlocalStorage("newHomeScropTop");
-        setTimeout(() => {
-            common.scrollToTop(h);
-        }, 3000)
+
+        common.scrollToTop(h);
+
     }
 }
 
