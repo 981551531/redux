@@ -18,30 +18,31 @@ class NewListcpt extends Component {
             let str = "";
             if (item.imageurls.length === 3) {
                 console.log("图片数量", item.imageurls.length)
-                str = <div key={index} className={`${bootstrap.row} ${style.new_list_box}`}>
-                    <Link to={`/newsDetal/${item.nid}`}>
-                        <div className={`${bootstrap["col-xs-12"]} ${style.new_tile}`}>{item.title}</div>
-                        <div className={bootstrap["col-xs-12"]}>
+                str = <div key={index} onClick={this.goToDetailHandler.bind(this, item.nid)}
+                           className={`${bootstrap.row} ${style.new_list_box}`}>
 
-                            {item.imageurls.map((item, index) => {
-                                return (
+                    <div className={`${bootstrap["col-xs-12"]} ${style.new_tile}`}>{item.title}</div>
+                    <div className={bootstrap["col-xs-12"]}>
 
-                                    <div className={bootstrap["col-xs-4"]}>
-                                        <img className={style["img_responsive"]} src={item.url_webp}/>
-                                    </div>
+                        {item.imageurls.map((item, index) => {
+                            return (
 
-                                )
-                            })}
+                                <div className={bootstrap["col-xs-4"]}>
+                                    <img className={style["img_responsive"]} src={item.url_webp}/>
+                                </div>
 
-                        </div>
-                    </Link>
+                            )
+                        })}
+
+                    </div>
+
                 </div>
             }
             else if (item.imageurls.length === 1) {
 
 
-                str = <div key={index} className={`${bootstrap.row} ${style.new_list_box}`}>
-                    <Link to={`/newsDetal/${item.nid}`}>
+                str = <div key={index} onClick={this.goToDetailHandler.bind(this, item.nid)} className={`${bootstrap.row} ${style.new_list_box}`}>
+
                         <div className={bootstrap["col-xs-4"]}>
                             {item.imageurls.map((item, index) => {
                                 return (
@@ -52,14 +53,14 @@ class NewListcpt extends Component {
                             })}
                         </div>
                         <div className={`${bootstrap["col-xs-8"]} ${style.new_tile}`}>{item.title}</div>
-                    </Link>
+
                 </div>
             }
             else {
-                str = <div key={index} className={`${bootstrap.row} ${style.new_list_box}`}>
-                    <Link to={`/newsDetal/${item.nid}`}>
+                str = <div key={index} onClick={this.goToDetailHandler.bind(this, item.nid)} className={`${bootstrap.row} ${style.new_list_box}`}>
+
                         <div className={`${bootstrap["col-xs-12"]} ${style.new_tile}`}>{item.title}</div>
-                    </Link>
+
                 </div>
             }
             return str;
@@ -67,8 +68,11 @@ class NewListcpt extends Component {
 
         return (
             <React.Fragment>
+                {
+                    console.log("木偶逐渐", this.props.newsList.dataList)
+                }
                 <div className={`${bootstrap["container"]}`}>
-                    {this.props.dataList.map((item, index) => listStr(item, index))}
+                    {this.props.newsList.dataList && this.props.newsList.dataList.map((item, index) => listStr(item, index))}
 
                 </div>
 
@@ -76,12 +80,18 @@ class NewListcpt extends Component {
         )
     }
 
+    goToDetailHandler(nid) {
+        this.props.goToDetailFn(nid);
+    }
+
 
 }
 
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        newsList: state.newsList
+    }
 }
 
 function mapDispatchToProps(dispatch) {

@@ -10,6 +10,10 @@ let newDetal = new newDetalSer();
 class newsDetal extends Component {
     constructor() {
         super();
+        this.state = {
+            newsInfo: ""
+            ,
+        }
 
     }
 
@@ -19,7 +23,7 @@ class newsDetal extends Component {
 
         return (
             <React.Fragment>
-                <NewsDetailcpt date={this.props.newsDetal.info}/>
+                <NewsDetailcpt date={this.state.newsInfo}/>
             </React.Fragment>
         )
     }
@@ -37,6 +41,10 @@ class newsDetal extends Component {
         this.props.newDetailActions.add({
             info: newsDetal
         })
+        this.setState({
+            newsInfo: this.props.newsDetal.info
+        });
+        document.title = "唯一新闻-" + this.state.newsInfo.title;
 
     }
 

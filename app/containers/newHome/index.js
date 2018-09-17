@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'   ;
 import {Link} from 'react-router-dom'    ;
 import NewTagStyle from './subPage/newTagStyle'
 import NewList from './subPage/NewList'
+import common from "../../static/js/common"
 
 import style from './index.less'
 
@@ -19,7 +20,8 @@ class newHome extends React.Component {
             <React.Fragment>
 
                 <NewTagStyle/>
-                <NewList className={style.font_color}> 新闻首页</NewList>
+                <NewList className={style.font_color}
+                         goToDetailRootFn={this.goToDetailRootFn.bind(this)}> 新闻首页</NewList>
 
             </React.Fragment>
         )
@@ -29,7 +31,20 @@ class newHome extends React.Component {
     updateCityHandler() {
 
     }
+
+    goToDetailRootFn(nid) {
+        let y = common.getMousePos().y;
+        common.setlocalStorage("newHomeScropTop", y);
+        this.props.history.push(`/newsDetal/${nid}`)
+    }
+
+    componentDidMount() {
+        let h = common.getlocalStorage("newHomeScropTop");
+        setTimeout(() => {
+            common.scrollToTop(h);
+        }, 3000)
+    }
 }
 
 
-export default newHome ;
+export default newHome;

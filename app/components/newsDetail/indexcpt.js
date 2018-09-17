@@ -12,7 +12,7 @@ class NewsDetailcpt extends React.Component {
 
             if (this.props.date) {
                 let newInfo = this.props.date;
-
+                 console.log(newInfo)
                 return (
                     <div className={bootstarp.container}>
                         <div className={bootstarp.row}>
@@ -38,7 +38,8 @@ class NewsDetailcpt extends React.Component {
                                                     item.type === "text" ?
                                                         <div className={bootstarp["col-xs-12"]}>
                                                             <p className={style.info_main}>
-                                                                {item.data}
+                                                                {common.delHtmlTag(item.data)}
+
                                                             </p>
                                                         </div>
                                                         :
