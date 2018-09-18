@@ -19,7 +19,7 @@ class homeSer {
         return data;
     }
 
-    async getNewsList(category_id = 101) {
+    async getNewsList(category_id = "101", category_name = "") {
         let url = apiUrl.newList;
         let parames = {
             "from": "news_webapp",
@@ -32,6 +32,15 @@ class homeSer {
             "action": 0,
             "display_time": (new Date()).valueOf(),
             "wf": 0
+        }
+        if (category_id != "101" && category_id != "102") {
+            //category_name
+            parames.category_name = category_name;
+            parames.category_id = "";
+        }
+
+        if (category_id != "101") {
+            url = apiUrl.moreNewsList;
         }
 
         let data = await  fetchApi.POST(url, parames);

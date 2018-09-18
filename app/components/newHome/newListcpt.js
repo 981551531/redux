@@ -17,7 +17,7 @@ class NewListcpt extends Component {
 
             let str = "";
             if (item.imageurls.length === 3) {
-                console.log("图片数量", item.imageurls.length)
+
                 str = <div key={index} onClick={this.goToDetailHandler.bind(this, item.nid)}
                            className={`${bootstrap.row} ${style.new_list_box}`}>
 
@@ -68,9 +68,7 @@ class NewListcpt extends Component {
 
         return (
             <React.Fragment>
-                {
-                    console.log("木偶逐渐", this.props.newsList.dataList)
-                }
+
                 <div className={`${bootstrap["container"]}`}>
                     {this.props.newsList.dataList && this.props.newsList.dataList.map((item, index) => listStr(item, index))}
 

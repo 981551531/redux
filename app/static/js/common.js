@@ -1,4 +1,5 @@
 import $ from 'jquery'
+
 class common {
     /**
      * 时间戳格式化函数
@@ -93,9 +94,9 @@ class common {
         console.log("执行了。。。")
         let divH = document.getElementById("root").clientHeight;
 
-        $('html,body').stop().animate({ scrollTop:height},0);
-         
+        //$('html,body').stop().animate({ scrollTop:height},0);
 
+        window.scrollTo(0, height)
 
     }
 }

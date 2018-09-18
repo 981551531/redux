@@ -1,8 +1,12 @@
 import React from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import NewStyleList from '../../../components/newHome/newStyleList'
 import style from './index.less'
 import bootstrap from '../../../static/bootstrap/css/bootstrap.css'
 import homeSer from '../../../fetch/Home/homeSer'
+import * as newsTagActions from '../../../actions/newsTag'
+import * as newListActions from "../../../actions/newInfo";
 
 let newhome = new homeSer();
 
@@ -20,7 +24,8 @@ class NewTagStyle extends React.Component {
         return (
 
             <React.Fragment>
-                <NewStyleList showMoreTagHandler={this.showMoreTagHandler.bind(this)} data={this.state.data}
+                <NewStyleList showMoreTagHandler={this.showMoreTagHandler.bind(this)}
+                              changeTagFun={this.changeTagFun.bind(this)} data={this.state.data}
                               isMoreData={this.state.isMoreData}/>
             </React.Fragment>
 
@@ -51,6 +56,53 @@ class NewTagStyle extends React.Component {
         })
     }
 
+    changeTagFun(cate_id,name) {
+        let idredux = this.props.newsTag.tagId;
+        if (idredux) {
+            this.props.newsTagActions.update({
+                tagId: cate_id,
+                name:name
+            })
+        } else {
+            this.props.newsTagActions.add({
+                tagId: cate_id,
+                name:name
+            })
+        }
+
+        this.getNewList(cate_id,name)
+    }
+
+    async getNewList(cate_id,name) {
+    
+        let data = await newhome.getNewsList(cate_id,name);
+        let list = data.data.news;
+
+
+        this.props.newListActions.add({
+            dataList: list
+        })
+
+
+    }
+
 }
 
-export default NewTagStyle
+
+function mapStateToProps(state) {
+    return {
+        newsTag: state.newsTag, newsList: state.newsList
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        newsTagActions: bindActionCreators(newsTagActions, dispatch),
+        newListActions: bindActionCreators(newListActions, dispatch)
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewTagStyle)

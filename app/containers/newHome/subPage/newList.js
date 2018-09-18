@@ -36,6 +36,7 @@ class NewList extends Component {
     }
 
     async componentDidMount() {
+        console.log("触发了新闻类别的redux",this.props.newsTag.tagId)
         if (!this.props.newsList.dataList) {
 
 
@@ -53,7 +54,15 @@ class NewList extends Component {
         this.setState({
             isLoadingMore: true
         })
-        let data = await newhome.getNewsList(101);
+        let tagId = this.props.newsTag.tagId;
+        let name=this.props.newsTag.name;
+        if (!tagId) {
+            tagId = 101;
+        }
+        if (!tagId) {
+            name = "";
+        }
+        let data = await newhome.getNewsList(tagId,name);
         let list = data.data.news;
         let oldList = this.props.newsList.dataList;
         console.log("oldList", oldList)
@@ -78,7 +87,7 @@ class NewList extends Component {
     }
 
     goToDetailFn(nid) {
-     this.props.goToDetailRootFn(nid);
+        this.props.goToDetailRootFn(nid);
     }
 
 }
@@ -86,7 +95,8 @@ class NewList extends Component {
 
 function mapStateToProps(state) {
     return {
-        newsList: state.newsList
+        newsList: state.newsList,
+        newsTag: state.newsTag
     }
 }
 

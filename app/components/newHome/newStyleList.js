@@ -21,7 +21,7 @@ class NewStyleList extends Component {
                             className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.more_tag}`}
                             onClick={this.showMoreTagClickHandler.bind(this)}>{this.props.isMoreData ? "收起∧" : "更多∨"}</div>
                         <div style={this.props.isMoreData ? {display: "block"} : {display: "none"}} key={item.cate_id}
-                             className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}`}>{item.name}</div>
+                             className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}`} onClick={this.changeTagHandler.bind(this,item.cate_id,item.name)}>{item.name}</div>
                     </React.Fragment>
 
 
@@ -29,12 +29,12 @@ class NewStyleList extends Component {
                 if (index < 3) {
 
                     str = <div key={item.cate_id}
-                               className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}`}>{item.name}</div>
+                               className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}` }  onClick={this.changeTagHandler.bind(this,item.cate_id,item.name)}>{item.name}</div>
 
                 } else {
 
                     str = <div style={this.props.isMoreData ? {display: "block"} : {display: "none"}} key={item.cate_id}
-                               className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}`}>{item.name}</div>
+                               className={`${bootstrap["col-xs-3"]} ${bootstrap["text-center"]} ${style.item}`}  onClick={this.changeTagHandler.bind(this,item.cate_id,item.name)}  >{item.name}</div>
 
                 }
             }
@@ -59,6 +59,9 @@ class NewStyleList extends Component {
     showMoreTagClickHandler() {
         this.props.showMoreTagHandler()
 
+    }
+    changeTagHandler(cate_id,name){
+        this.props.changeTagFun(cate_id,name);
     }
 
 }
