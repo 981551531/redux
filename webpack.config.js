@@ -92,7 +92,28 @@ module.exports = {
                   exclude: /node_modules/
               },
   */
+            {   // 使用MiniCssExtractPlugin处理css
+                test: [/\.css$/, /\.less$/],
+                include:
+                    path.resolve(__dirname, 'app/static'),
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
 
+                    },
+
+                    {
+
+                        loader: "css-loader",
+
+
+                    },
+                    {
+                        loader: "less-loader"
+                    }
+                ],
+
+            },
             {   // 使用MiniCssExtractPlugin处理css
                 test: [/\.css$/, /\.less$/],
                 use: [
@@ -100,7 +121,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader
 
                     },
-                 
+
                     {
 
                         loader: "css-loader",
@@ -115,7 +136,8 @@ module.exports = {
                     {
                         loader: "less-loader"
                     }
-                ]
+                ],
+                exclude: path.resolve(__dirname, 'app/static')
             },
 
 

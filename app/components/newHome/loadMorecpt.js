@@ -1,14 +1,14 @@
 import React, {Component} from "react";
-import bootstrap from "../../static/bootstrap/css/bootstrap.min.css"
+import     "../../static/bootstrap/css/bootstrap.min.css"
 import style from "./style.less"
 
 class LoadMorecpt extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className={bootstrap.container} ref="wrapper">
-                    <div className={bootstrap.row}>
-                        <div className={`${bootstrap["col-xs-12"]} ${bootstrap["text-center"]}`}>
+                <div className="container" ref="wrapper">
+                    <div className="row">
+                        <div className="col-xs-12 text-center" >
                             {this.props.isLoadingMore ? "正在加载" :
                                 <span onClick={this.getMoreDataClickHanler.bind(this)}>加载更多</span>}
                         </div>

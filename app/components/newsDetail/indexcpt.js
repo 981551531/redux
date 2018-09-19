@@ -2,7 +2,7 @@ import React from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import common from "../../static/js/common"
-import bootstarp from "../../static/bootstrap/css/bootstrap.min.css"
+import     "../../static/bootstrap/css/bootstrap.min.css"
 import style from "./style.less"
 
 class NewsDetailcpt extends React.Component {
@@ -14,14 +14,14 @@ class NewsDetailcpt extends React.Component {
                 let newInfo = this.props.date;
                  console.log(newInfo)
                 return (
-                    <div className={bootstarp.container}>
-                        <div className={bootstarp.row}>
-                            <div className={`${bootstarp["col-xs-12"]} ${bootstarp["text-center"]}`}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-xs-12 text-center" >
                                 <h3 className={style.info_title}> {
                                     newInfo.title
                                 }  </h3>
                             </div>
-                            <div className={`${bootstarp["col-lg-12"]}`}>
+                            <div className="col-lg-12">
                                 <span className={style.info_from}>{newInfo.site}</span>
                                 <span style={{"margin-left": "10px"}}
                                       className={style.info_from}>{common.getTimestamptoDate(newInfo.ts, 'yyyy年MM月dd日 hh:mm',)}</span>
@@ -32,11 +32,11 @@ class NewsDetailcpt extends React.Component {
                                 return (
                                     <React.Fragment>
                                         {item.data != "" ?
-                                            <div className={`${bootstarp.row} ${(index > 0) && style.info_top}`}>
+                                            <div className={`row ${(index > 0) && style.info_top}`}>
 
                                                 {
                                                     item.type === "text" ?
-                                                        <div className={bootstarp["col-xs-12"]}>
+                                                        <div className="col-xs-12">
                                                             <p className={style.info_main}>
                                                                 {common.delHtmlTag(item.data)}
 
@@ -44,9 +44,9 @@ class NewsDetailcpt extends React.Component {
                                                         </div>
                                                         :
                                                         <div>
-                                                            <div className={bootstarp["col-xs-12"]}>
+                                                            <div className="col-xs-12">
                                                                 <img src={item.data.big.url}
-                                                                     className={bootstarp["img-responsive"]}/>
+                                                                     className="img-responsive"/>
                                                             </div>
                                                         </div>
                                                 }
