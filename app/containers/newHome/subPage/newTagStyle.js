@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import NewStyleList from '../../../components/newHome/newStyleList'
 import style from './index.less'
-import bootstrap from '../../../static/bootstrap/css/bootstrap.css'
+
 import homeSer from '../../../fetch/Home/homeSer'
 import * as newsTagActions from '../../../actions/newsTag'
 import * as newListActions from "../../../actions/newInfo";
