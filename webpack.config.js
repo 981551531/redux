@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const pkg = require('./package.json');
 module.exports = {
     devtool: 'eval-source-map',//用户生成对照源文件，方便调试
@@ -148,10 +149,16 @@ module.exports = {
             },
 
 
-            {test: /\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, use: {loader: "url-loader?limit=50000"}},
+          /*  {test: /\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, use: {loader: "url-loader?limit=50000"}},*/
             {
-                test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
-                loader: "file-loader"
+                test: /\.(eot|woff|woff2|svg|ttf|png|jpg)([\?]?.*)$/,
+                loader: "file-loader"  ,
+                options: {
+                    name: '[name].[ext]',// 打包后的文件名称
+                    outputPath:'fonts', // 默认是dist目录
+                    publicPath:'../fonts/', // 图片的url前面追加'dist/images'
+                   
+                }
             }
         ]
     },
@@ -177,15 +184,20 @@ module.exports = {
         /*  new ExtractTextPlugin("[name]-bundle-[hash].css")*/
         new MiniCssExtractPlugin({
 
-            filename: "[name]-bundle-[hash].css"
+            filename: "css/[name]-bundle-[hash].css"
 
         }),
-     
+     /*   new CopyWebpackPlugin([
+            {from: './app/static/bootstrap/fonts', to: 'fonts'}
+
+        ]),*/
+
     ],
     optimization: {
         splitChunks: {
             chunks: 'all',
             name: 'common',
+
         },
         runtimeChunk: {
             name: 'runtime',
