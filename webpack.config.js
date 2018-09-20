@@ -122,7 +122,10 @@ module.exports = {
                 test: [/\.css$/, /\.less$/],
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader ,
+                        options: {
+                            outputPath:"css"
+                        }
 
                     },
 
@@ -157,15 +160,23 @@ module.exports = {
             _ENV_: JSON.stringify(process.env.NODE_ENV)
         }),
         new webpack.BannerPlugin('版权所有，翻版必究'),
-        new HtmlWebpackPlugin({
+      /*  new HtmlWebpackPlugin({
             template: __dirname + "/app/index.tmpl.html",//new 一个这个插件的实例，并传入相关的参数
             mapConfig:"css.css",
             title: 'react-music',
+            inject: 'body'
+        }),*/
+        new HtmlWebpackPlugin({
+            title: '唯一新闻',
+            favicon:  __dirname + '/app/static/images/favicon.ico',
+            template: __dirname + "/app/index.tmpl.html",
+            filename: 'index.html',
             inject: 'body'
         }),
         new webpack.HotModuleReplacementPlugin(),//热加载插件
         /*  new ExtractTextPlugin("[name]-bundle-[hash].css")*/
         new MiniCssExtractPlugin({
+
             filename: "[name]-bundle-[hash].css"
 
         }),

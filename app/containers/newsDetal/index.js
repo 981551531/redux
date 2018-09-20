@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import newDetalSer from "../../fetch/newDetal/newDetalSer"    ;
-import NewsDetailcpt from "../../components/newsDetail/indexcpt"
+import NewsDetailcpt from "../../components/newsDetail/indexcpt"  ;
+import TopMenu from "../../components/newHome/topMenu"  ;
 import * as newDetailActions from "../../actions/newDetail"
 
 let newDetal = new newDetalSer();
@@ -23,6 +24,7 @@ class newsDetal extends Component {
 
         return (
             <React.Fragment>
+                <TopMenu/>
                 <NewsDetailcpt date={this.state.newsInfo}/>
             </React.Fragment>
         )

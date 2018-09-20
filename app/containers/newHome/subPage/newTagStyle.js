@@ -15,7 +15,8 @@ class NewTagStyle extends React.Component {
         super(props, context);
         this.state = {
             data: [],
-            isMoreData: false
+            isMoreData: false,
+            choseTag: ""
         }
 
     }
@@ -26,7 +27,7 @@ class NewTagStyle extends React.Component {
             <React.Fragment>
                 <NewStyleList showMoreTagHandler={this.showMoreTagHandler.bind(this)}
                               changeTagFun={this.changeTagFun.bind(this)} data={this.state.data}
-                              isMoreData={this.state.isMoreData}/>
+                              isMoreData={this.state.isMoreData} choseTag={this.state.choseTag}/>
             </React.Fragment>
 
         )
@@ -56,26 +57,29 @@ class NewTagStyle extends React.Component {
         })
     }
 
-    changeTagFun(cate_id,name) {
+    changeTagFun(cate_id, name) {
         let idredux = this.props.newsTag.tagId;
         if (idredux) {
             this.props.newsTagActions.update({
                 tagId: cate_id,
-                name:name
+                name: name
             })
         } else {
             this.props.newsTagActions.add({
                 tagId: cate_id,
-                name:name
+                name: name
             })
         }
+        this.setState({
+            choseTag: cate_id
+        });
 
-        this.getNewList(cate_id,name)
+        this.getNewList(cate_id, name)
     }
 
-    async getNewList(cate_id,name) {
-    
-        let data = await newhome.getNewsList(cate_id,name);
+    async getNewList(cate_id, name) {
+
+        let data = await newhome.getNewsList(cate_id, name);
         let list = data.data.news;
 
 
@@ -91,7 +95,8 @@ class NewTagStyle extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        newsTag: state.newsTag, newsList: state.newsList
+        newsTag: state.newsTag,
+        newsList: state.newsList
     }
 }
 
